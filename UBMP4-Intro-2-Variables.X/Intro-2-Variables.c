@@ -52,7 +52,10 @@ int main(void)
         {
             LED4 = 1;
         }
-        
+        else 
+        {
+            LED4 = 0; 
+        }
         // Reset count and turn off LED D4
         if(SW3 == 0)
         {
