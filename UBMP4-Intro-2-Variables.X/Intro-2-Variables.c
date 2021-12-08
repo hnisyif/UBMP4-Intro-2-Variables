@@ -72,7 +72,7 @@ int main(void)
             RESET();
         }
     }
-}
+ }
 
 /* Program Analysis
  * 
@@ -81,13 +81,21 @@ int main(void)
  *    What is the the maximum value an 8-bit variable can store?
  *    What are some benefits and drawbacks of using 8-bit variables in an 8-bit
  *    microcontroller?
- * 
+
+ *  The maximum number that an 8-bit value can hold is 127. The benifits of using 
+    an 8 bit is that it can hold a higher number than the limit of 8-bit. But it 
+    won't be possible to do much with that variable since there needs to be a 
+    seperate memory register to keep track of where it's held and more. 
+
  * 2. The constant 'maxCount' is defined using a declaration similar to that
  *    used for the SW2Count variable, but with the 'const' prefix added in the
  *    declaration. Can you think of some advantages of declaring a constant like
  *    this, using a separate statement above the main code, rather than just
  *    embedding the value of the constant where it is needed in the code?
- * 
+
+ *  The "conts" prefix ensures that the variable being declared is never changing. 
+    Instead of having the statement 
+
  * 3. This program should light LED D3 every time SW2 is pressed, and light
  *    LED D4 once the count reaches 50. Try it, and count how many times you
  *    have to press the button until LED D4 turns on. SW3 resets the count so
