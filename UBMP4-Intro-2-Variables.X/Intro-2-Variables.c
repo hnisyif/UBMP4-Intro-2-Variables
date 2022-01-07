@@ -27,7 +27,9 @@ const unsigned char maxCount = 25;
 #define notPressed 1
 
 // Program variable definitions
+unsigned char SW5Count = 0;
 unsigned char SW2Count = 0;
+bool SW5Pressed = false;
 bool SW2Pressed = false;
 
 int main(void)
@@ -60,17 +62,69 @@ int main(void)
         if(SW2Count >= maxCount)
         {
             LED4 = 1;
+            __delay_ms(125);
+            LED4 = 0;
+            __delay_ms(125);
+            LED4 = 1;
+            __delay_ms(125);
+            LED4 = 0;
+            __delay_ms(125);
+            LED4 = 1;
+            __delay_ms(125);
+            LED4 = 0;
+            __delay_ms(125);
+            
+            SW2Count = 0;
+            SW5Count = 0;
         }
         else
         {
             LED4 = 0;
         }
-        // Reset count and turn off LED D4
-        if(SW3 == 0)
+
+        // Player 2 buttons
+        // Count new SW2 button presses
+
+        if(SW5 == pressed && SW5Pressed == false)
         {
-            LED4 = 0;
-            SW2Count = 0;
+            LED6 = 1;
+            if(SW5Count < 255)
+            {
+                SW5Count++; 
+            }
+            SW5Pressed = true;
         }
+
+        // Clear pressed state if released
+        if(SW5 == notPressed)
+        {
+            LED6 = 0;
+            SW5Pressed = false;
+        }
+      
+        if(SW5Count >= maxCount)
+        {
+            LED5 = 1;
+            __delay_ms(125);
+            LED5 = 0;
+            __delay_ms(125);
+            LED5 = 1;
+            __delay_ms(125);
+            LED5 = 0;
+            __delay_ms(125);
+            LED5 = 1;
+            __delay_ms(125);
+            LED5 = 0;
+            __delay_ms(125);
+
+            SW2Count = 0;
+            SW5Count = 0;
+        }
+        else
+        {
+            LED5 = 0;
+        }
+
         
         // Add a short delay to the main while loop.
         __delay_ms(10);
@@ -254,6 +308,52 @@ int main(void)
  *    second palyer wins. Use a logical condition statement to reset the game
  *    by clearing the count and turning off the LEDs if either SW3 or SW4 is
  *    pressed.
+
+ *  I made it reset the count after making it flash a bit instead of resetting 
+    it with a button. 
+
+ // Player 2 buttons
+        // Count new SW2 button presses
+
+        if(SW5 == pressed && SW5Pressed == false)
+        {
+            LED6 = 1;
+            if(SW5Count < 255)
+            {
+                SW5Count++; 
+            }
+            SW5Pressed = true;
+        }
+
+        // Clear pressed state if released
+        if(SW5 == notPressed)
+        {
+            LED6 = 0;
+            SW5Pressed = false;
+        }
+      
+        if(SW5Count >= maxCount)
+        {
+            LED5 = 1;
+            __delay_ms(125);
+            LED5 = 0;
+            __delay_ms(125);
+            LED5 = 1;
+            __delay_ms(125);
+            LED5 = 0;
+            __delay_ms(125);
+            LED5 = 1;
+            __delay_ms(125);
+            LED5 = 0;
+            __delay_ms(125);
+
+            SW2Count = 0;
+            SW5Count = 0;
+        }
+        else
+        {
+            LED5 = 0;
+        }
  * 
  * 2. Use your knowledge of Boolean variables and logical conditions to simulate
  *    a toggle button. Each new press of the toggle button will 'toggle' an LED
