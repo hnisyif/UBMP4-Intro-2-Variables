@@ -29,7 +29,7 @@ const unsigned char maxCount = 25;
 // Program variable definitions
 unsigned char SW5Count = 0;
 unsigned char SW2Count = 0;
-bool SW5Pressed = false;
+
 bool SW2Pressed = false;
 
 int main(void)
@@ -40,94 +40,23 @@ int main(void)
 	
     // Code in this while loop runs repeatedly.
     while(1)
-	{
-        // Count new SW2 button presses
+	{ 
+
+        //Toggle Functionality 
         if(SW2 == pressed && SW2Pressed == false)
         {
-            LED3 = 1;
-            if(SW2Count < 255)
-            {
-                SW2Count = SW2Count + 1;
-            }
+            LED3 = !LED3; 
             SW2Pressed = true;
         }
-
-        // Clear pressed state if released
+        
+        //Recognize if SW2 is pressed
         if(SW2 == notPressed)
         {
-            LED3 = 0;
             SW2Pressed = false;
         }
-      
-        if(SW2Count >= maxCount)
-        {
-            LED4 = 1;
-            __delay_ms(125);
-            LED4 = 0;
-            __delay_ms(125);
-            LED4 = 1;
-            __delay_ms(125);
-            LED4 = 0;
-            __delay_ms(125);
-            LED4 = 1;
-            __delay_ms(125);
-            LED4 = 0;
-            __delay_ms(125);
-            
-            SW2Count = 0;
-            SW5Count = 0;
-        }
-        else
-        {
-            LED4 = 0;
-        }
 
-        // Player 2 buttons
-        // Count new SW2 button presses
-
-        if(SW5 == pressed && SW5Pressed == false)
-        {
-            LED6 = 1;
-            if(SW5Count < 255)
-            {
-                SW5Count++; 
-            }
-            SW5Pressed = true;
-        }
-
-        // Clear pressed state if released
-        if(SW5 == notPressed)
-        {
-            LED6 = 0;
-            SW5Pressed = false;
-        }
-      
-        if(SW5Count >= maxCount)
-        {
-            LED5 = 1;
-            __delay_ms(125);
-            LED5 = 0;
-            __delay_ms(125);
-            LED5 = 1;
-            __delay_ms(125);
-            LED5 = 0;
-            __delay_ms(125);
-            LED5 = 1;
-            __delay_ms(125);
-            LED5 = 0;
-            __delay_ms(125);
-
-            SW2Count = 0;
-            SW5Count = 0;
-        }
-        else
-        {
-            LED5 = 0;
-        }
-
-        
         // Add a short delay to the main while loop.
-        __delay_ms(10);
+        __delay_ms(20);
         
         // Activate bootloader if SW1 is pressed.
         if(SW1 == 0)
@@ -359,14 +288,29 @@ int main(void)
  *    a toggle button. Each new press of the toggle button will 'toggle' an LED
  *    to its opposite state. (Toggle buttons are commonly used as push-on, 
  *    push-off power buttons in digital devices.)
- * 
+
+ *   //Toggle Functionality 
+        if(SW2 == pressed && SW2Pressed == false)
+        {
+            LED3 = !LED3; 
+            SW2Pressed = true;
+        }
+        
+        //Recognize if SW2 is pressed
+        if(SW2 == notPressed)
+        {
+            SW2Pressed = false;
+        }
+
  * 3. A multi-function button can be used to enable one action when pressed, and
  *    a second or alternate action when held. A variable that counts loop cycles
  *    can be used to determine how long a button is held (just as the first
  *    program unitentionally did, because of the loop structure). Make a
  *    multifunction button that lights one LED when a button is pressed, and
  *    lights a second LED after the button is held for more that one second.
- * 
+
+ *  
+
  * 4. Do your pushbuttons bounce? Switch bounce is the term that describes
  *    switch contacts repeatedly closing and opening before settling in their
  *    final (usually closed) state. Switch bounce in a room's light switch is
