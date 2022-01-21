@@ -22,7 +22,7 @@
 // TODO Set linker code offset to '800' under "Additional options" pull-down.
 
 // Program constant definitions
-const unsigned char maxCount = 25;
+const unsigned char maxCount = 500;
 #define pressed 0
 #define notPressed 1
 
@@ -42,21 +42,26 @@ int main(void)
     while(1)
 	{ 
 
-        //Toggle Functionality 
-        if(SW2 == pressed && SW2Pressed == false)
+        if(SW2 == pressed)
         {
-            LED3 = !LED3; 
-            SW2Pressed = true;
-        }
-        
-        //Recognize if SW2 is pressed
-        if(SW2 == notPressed)
-        {
-            SW2Pressed = false;
+            SW2Count++;
         }
 
+        if(SW2 == notPressed && SW2Count <= maxCount)
+        {
+            LED3 = 1;
+            __delay_ms(500); 
+            LED3 = 0;
+        }
+
+        if(SW2 == pressed && SW2Count >=  maxCount)
+        {
+            LED4 = 1; 
+            __delay_ms(500);
+            LED4 = 0;
+        }
         // Add a short delay to the main while loop.
-        __delay_ms(20);
+        __delay_ms(10);
         
         // Activate bootloader if SW1 is pressed.
         if(SW1 == 0)
